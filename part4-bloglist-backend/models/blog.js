@@ -1,0 +1,34 @@
+// models/blog.js:
+// Mongoose Model Definition
+const mongoose = require('mongoose')  // Imports the Mongoose library, for MongoDB object modeling.
+// Define the Blog Schema
+const blogSchema = new mongoose.Schema({
+  // Define the structure for the Blog documents in the MongoDB collection.
+  title: {
+    type: String,
+    required: true,
+  },
+  author: String,
+  url: {
+    type: String,
+    required: true,
+  },
+  likes: {
+    type: Number,
+    default: 0, // Set default likes to 0 if not provided.
+  },
+})
+
+// Transform the document object before sending as JSON
+blogSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()  // Rename the MongoDB default primary key _id to id.
+    delete returnedObject._id                          // Remove the original _id field.
+    delete returnedObject.__v                          // Removes the Mongoose version key (__v).
+  },
+})
+
+// Model Creation: Compile the schema into a reusable model named Blog, used for database operations.
+const Blog = mongoose.model('Blog', blogSchema)
+
+module.exports = Blog

@@ -1,0 +1,42 @@
+#
+# Blog List API Test Requests
+#
+# Requires: VS Code REST Client extension
+# Base URL: http://localhost:3002 (as configured in .env and index.js)
+#
+
+### 1. GET ALL BLOGS
+# Fetches all blogs from the database (should include the seeded data).
+GET http://localhost:3002/api/blogs
+
+### 2. POST A NEW BLOG (Create)
+# Creates a new blog post. Note the 'title' and 'url' fields are required.
+POST http://localhost:3002/api/blogs
+Content-Type: application/json
+
+{
+    "title": "Test Blog Post No 1. Posted from REST Client",
+    "author": "VS Code REST Client",
+    "url": "http:/VS-Code/rest-client",
+    "likes": 41
+}
+
+### 3. POST ANOTHER BLOG (To easily get an ID for deletion testing)
+# Run this request, then copy the 'id' from the response body for request #4.
+POST http://localhost:3002/api/blogs
+Content-Type: application/json
+
+{
+    "title": "Test Blog Post No 2. Posted from REST Client",
+    "author": "VS Code REST Client",
+    "url": "http:/VS-Code/rest-client",
+    "likes": 42
+}
+
+### 4. DELETE A BLOG (Placeholder: Requires the DELETE route implemented)
+#
+# IMPORTANT: Replace <BLOG_ID_TO_DELETE> with the actual ID of a blog post.
+# (e.g., the ID returned from running the previous POST request).
+# We will implement this route next!
+#
+DELETE http://localhost:3002/api/blogs/<BLOG_ID_TO_DELETE>
