@@ -1,9 +1,22 @@
 // app.js:
 const express = require('express')       // Imports Express framework.
+const mongoose = require('mongoose')      // Import Mongoose
 const blogsRouter = require('./controllers/blogs') // Import the router module from blogs.js
 const middleware = require('./utils/middleware')  // Imports the error handlers, exported from middleware.js.
+const config = require('./utils/config') // Import config to get MONGODB_URI
 
-const app = express()                    // Initialization: Create the core Express application object.
+const app = express()  // Initialization: Create the core Express application object.
+
+mongoose
+  .connect(config.MONGODB_URI)
+  .then(() => {
+    //logger.info('connected to MongoDB')
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    //logger.error('error connection to MongoDB:', error.message)
+    console.error('error connecting to MongoDB:', error.message)
+  })
 
 // Middleware
 // Tell Express to use the built-in JSON parser.

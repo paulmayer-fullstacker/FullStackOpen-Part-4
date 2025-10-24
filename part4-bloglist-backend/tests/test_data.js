@@ -1,5 +1,5 @@
 // tests/test_data.js:
-
+// Define a list with a single blog object, used for unit tests.
 const listWithOneBlog = [
   {
     _id: '5a422aa71b54a676234d17f8',
@@ -11,7 +11,7 @@ const listWithOneBlog = [
   }
 ]
 
-
+// Define a list with multiple blog objects, used for unit tests.
 const listOfBlogs = [
   {
     _id: '5a422a851b54a676234d17f7',
@@ -63,10 +63,10 @@ const listOfBlogs = [
   }
 ]
 
-
+// Defines an empty list, used for edge-case unit tests.
 const emptyList = []
 
-
+// Export the test data arrays for use by list_helper.test.js.
 module.exports = {
   listWithOneBlog,
   listOfBlogs,
