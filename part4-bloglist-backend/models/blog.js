@@ -6,12 +6,12 @@ const blogSchema = new mongoose.Schema({
   // Define the structure for the Blog documents in the MongoDB collection.
   title: {
     type: String,
-    required: true,
+    required: true,  // Mongoose validation ensures 'title' must be present for creation/update.
   },
-  author: String,
+  author: String,    // Optional
   url: {
     type: String,
-    required: true,
+    required: true,  // 'url' must be present.
   },
   likes: {
     type: Number,
@@ -30,5 +30,5 @@ blogSchema.set('toJSON', {
 
 // Model Creation: Compile the schema into a reusable model named Blog, used for database operations.
 const Blog = mongoose.model('Blog', blogSchema)
-
+// Export the Blog Mongoose Model so it can be used by other modules (in the controllers and tests).
 module.exports = Blog
