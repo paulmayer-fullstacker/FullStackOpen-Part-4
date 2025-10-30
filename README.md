@@ -24,8 +24,9 @@ API requests, for manual testing via VSCode's REST Client, can be found in the r
 
 VSCode's REST Client can be used to populate the database (creating users and blogs). Alternatively, we can use a seeding function (seed-mongo-db.js), and preconfigured seeding data (utils/seeding_data.js). To execute the seeding process, from the cmd line, run: npm run seed. Seeding should be completed before the server is started.
 
+---
 
-### Version Control
+## Version Control
 
 The project (part4-bloglist-backend) has been pushed to my GitHub repository at https://github.com/paulmayer-fullstacker/FullStackOpen-Part-4. The project found at https://github.com/paulmayer-fullstacker/FullStackOpen-Part-4/part4-bloglist-backend, represent the final submission to exercise 4.23.
 
