@@ -5,38 +5,75 @@
 # Base URL: http://localhost:3002 (as configured in .env and index.js)
 #
 
-### 1. GET ALL BLOGS
-# Fetches all blogs from the database (should include the seeded data).
-GET http://localhost:3002/api/blogs
+####### Ex 4.15 - 4.23
 
-### 2. POST A NEW BLOG (Create)
-# Creates a new blog post. Note the 'title' and 'url' fields are required.
-POST http://localhost:3002/api/blogs
+### Base URL for our API
+@baseUrl = http://localhost:3002
+
+### Variable to store auth token after login
+# Tokens are received in quots ("token"). Howver they are copied here directly (token).
+# Example: @authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE2NzEwMDAwMDAsImV4cCI6MTY3MTAwMzYwMH0.signature
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJlc3QtY2xpZW50LXVzZXI0IiwiaWQiOiI2OTAzNzQ5NDMyZmI4NDQwN2U3MDVhMGYiLCJpYXQiOjE3NjE4MzQxNDh9.UVz3eJFA06r3MLil2ccXfoIv8CDNrtBRC3T_0SUU4Ag
+# Every time we receive a new token, in a response, we need to copy that token to my @authToken variable for further transactions to work
+
+
+### Create new users api/users. Users have a username, password and name.
+POST {{baseUrl}}/api/users
 Content-Type: application/json
 
 {
-    "title": "Test Blog Post No 1. Posted from REST Client",
-    "author": "VS Code REST Client",
-    "url": "http:/VS-Code/rest-client",
-    "likes": 41
+"username": "rest-client-user4",
+"name": "RestClient User4",
+"password": "user4password"
 }
 
-### 3. POST ANOTHER BLOG (To easily get an ID for deletion testing)
-# Run this request, then copy the 'id' from the response body for request #4.
-POST http://localhost:3002/api/blogs
+### Get list of all users from the database.
+
+GET {{baseUrl}}/api/users
+
+
+### Get all blogs
+
+GET {{baseUrl}}/api/blogs
+
+
+### 1. LOGIN to get a valid Token (Run this before post new blog or delete blog)
+# Place the token in the @authToken variable.
+POST {{baseUrl}}/api/login
 Content-Type: application/json
 
 {
-    "title": "Test Blog Post No 2. Posted from REST Client",
-    "author": "VS Code REST Client",
-    "url": "http:/VS-Code/rest-client",
-    "likes": 42
+    "username": "rest-client-user4",
+    "password": "user4password"
 }
 
-### 4. DELETE A BLOG (Placeholder: Requires the DELETE route implemented)
-#
-# IMPORTANT: Replace <BLOG_ID_TO_DELETE> with the actual ID of a blog post.
-# (e.g., the ID returned from running the previous POST request).
-# We will implement this route next!
-#
-DELETE http://localhost:3002/api/blogs/<BLOG_ID_TO_DELETE>
+
+### LOGIN Example (Requires successful user creation first)
+POST {{baseUrl}}/api/login
+Content-Type: application/json
+
+{
+    "username": "rest-client-user3",
+    "password": "user3password"
+}
+
+
+### Create a New Blog (Requires Authentication/Token)
+POST {{baseUrl}}/api/blogs
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "title": "REST Client with JWT Authentication Blog Post 22",
+  "url": "http://example.com/rest-client-post-jwt/22",
+  "likes": 10,
+  "userId": "6900cef23f7621b9d21497ec"
+}
+
+
+### Delete a Blog
+@blogIdToDelete = 690374c132fb84407e705a14
+DELETE {{baseUrl}}/api/blogs/{{blogIdToDelete}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+

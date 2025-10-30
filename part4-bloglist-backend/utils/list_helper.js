@@ -27,35 +27,7 @@ const favouriteBlog = (blogs) => {
       : favourite    // Otherwise, keep the existing favorite.
   })
 }
-// ** Removed in favour of lodash **
-// const mostBlogs = (blogs) => {
-//   if (blogs.length === 0) {
-//     return null
-//   }
-//   // Count blogs per author
-//   const blogCounts = blogs.reduce((counts, blog) => {
-//     // Increment the count for the current blog's author
-//     counts[blog.author] = (counts[blog.author] || 0) + 1
-//     return counts
-//   }, {})
 
-//   // 2. Find the author with the maximum number of blogs
-//   let topAuthor = null
-//   let maxBlogs = -1
-
-//   for (const author in blogCounts) {
-//     const currentBlogs = blogCounts[author]
-//     if (currentBlogs > maxBlogs) {
-//       maxBlogs = currentBlogs
-//       topAuthor = author
-//     }
-//   }
-//   // Return the result in the specified format
-//   return {
-//     author: topAuthor,
-//     blogs: maxBlogs
-//   }
-// }
 // Lodash interpretation of mostBlogs
 const mostBlogs = (blogs) => {
   if (blogs.length === 0) {
@@ -76,36 +48,7 @@ const mostBlogs = (blogs) => {
 
   return topAuthor
 }
-// ** Removed in favour of lodash **
-// const mostLikes = (blogs) => {
-//   if (blogs.length === 0) {
-//     return null
-//   }
 
-//   // Group blogs by author and sum their likes
-//   const likesByAuthor = blogs.reduce((totals, blog) => {
-//     // Add the current blog's likes to the author's running total
-//     totals[blog.author] = (totals[blog.author] || 0) + blog.likes
-//     return totals
-//   }, {})
-
-//   // Find the author with the maximum total likes
-//   let topAuthor = null
-//   let maxLikes = -1
-
-//   for (const author in likesByAuthor) {
-//     const currentLikes = likesByAuthor[author]
-//     if (currentLikes > maxLikes) {
-//       maxLikes = currentLikes
-//       topAuthor = author
-//     }
-//   }
-//   // Return the result in the specified format
-//   return {
-//     author: topAuthor,
-//     likes: maxLikes
-//   }
-// }
 // Lodash interpretation of mostLikes
 const mostLikes = (blogs) => {
   if (blogs.length === 0) {

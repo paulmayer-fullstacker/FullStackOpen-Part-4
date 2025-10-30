@@ -8,7 +8,7 @@ const blogSchema = new mongoose.Schema({
     type: String,
     required: true,  // Mongoose validation ensures 'title' must be present for creation/update.
   },
-  author: String,    // Optional
+  // author: String,  // Superseded by the 'user' attribute
   url: {
     type: String,
     required: true,  // 'url' must be present.
@@ -17,6 +17,11 @@ const blogSchema = new mongoose.Schema({
     type: Number,
     default: 0, // Set default likes to 0 if not provided.
   },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    // required: true, // A blog MUST have an author
+  }
 })
 
 // Transform the document object before sending as JSON
