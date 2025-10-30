@@ -26,6 +26,8 @@ const seedDatabase = async () => {  // Define main asynchronous function to hand
     const userMap = new Map() // Initialize a Map to store username -> Mongoose ID for linking.
     for (const user of multiUserData.testUsers) {  // Iterate through the raw user data imported from `seeding_data`.
       const passwordHash = await bcrypt.hash(user.password, 10)  // Hash the plaintext password with a salt round of 10.
+      // bcrypt library generates a random 16-byte salt. The salt is combined with the plain-text password.
+      // The combined string is run through the bcrypt hashing algorithem 2^saltRounds (2^10 = 1,024) times.
       const userObject = new User({  // Create a new Mongoose User document object.
         username: user.username,
         name: user.name,

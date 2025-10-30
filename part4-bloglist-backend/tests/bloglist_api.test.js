@@ -19,7 +19,9 @@ beforeEach(async () => {  // Hook that runs before every test.
   await Blog.deleteMany({}) // Clear the test database to ensure tests are independent (run in a clean state).
 
   // create test user
-  const passwordHash = await bcrypt.hash('password1234', 10)  // Hash the plaintext password for the test user securely.
+  const passwordHash = await bcrypt.hash('password1234', 10)   // Hash the plaintext password with a salt round of 10.
+  // bcrypt library generates a random 16-byte salt. The salt is combined with the plain-text password.
+  // The combined string is run through the bcrypt hashing algorithem 2^saltRounds (2^10 = 1,024) times.
   const userToSave = new User({ // Create new User Mongoose document locally in memory.
     username: 'testauthor',    // Set username for the test user.
     name: 'Test Author',      // Set the display name
